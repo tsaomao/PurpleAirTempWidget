@@ -1,17 +1,12 @@
-// Depending on a user selection, performs one of two actions:
-// 1. Pretty prints a JSON string
-// 2. Presents a UI to browse a JSON object or arary
-// The script is meant to be triggered from a share sheet
-// with a URL, file URL or a plain text as input.
+// Get current temperature in F from nearest PurpleAir Sensor
+// PurpleAir Sensor nearest to my house selected manually.
+// Initialize
 let url = "https://www.purpleair.com/json?key=157SMCFWIZ0DCUQ8&show=40695"
-// let fileURL = args.fileURLs[0]
-// let text = args.plainTexts[0]
 let r = new Request(url)
-
 let wg = new ListWidget()
-
 let json = null
 
+// try/catch load json from URL
 try {
   json = await r.loadJSON()
 } catch (e) {
@@ -23,10 +18,13 @@ try {
     json = null
 }
 
+// main routine
 runaswidget(prettyPrint(json, wg), wg)
 
+// Debug to Scriptable
 QuickLook.present(prettyPrint(json, wg))
 
+// Get text value for temperature in adjusted F
 function prettyPrint(json, wg) {
   let ret = "0"
   
@@ -49,6 +47,8 @@ function prettyPrint(json, wg) {
   }
 }
 
+// Main routine. Use widget to create Widget output
+// Output to widget
 function runaswidget(str, wg) {
 
   try {
