@@ -33,7 +33,10 @@ function prettyPrint(json, wg) {
   try {
   let str = JSON.stringify(json, null, 2)
   let jsonobj = JSON.parse(str)
-  let ret = jsonobj["results"][0]["temp_f"]
+//   PurpleAir says reading is on average 8 degrees F higher than actual
+  let tempf = jsonobj["results"][0]["temp_f"]
+  let retint = parseInt(tempf)
+  let ret = (retint - 8).toString()
   return ret
 } catch (e) {
     console.log(e)
