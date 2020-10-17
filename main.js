@@ -52,14 +52,17 @@ function prettyPrint(json, wg) {
 function runaswidget(str, wg) {
 
   try {
+    wg.backgroundColor = Color.blue()
+    
     let header = wg.addText("PurpleAir")
-    header.textSize = 15
-    header.textColor = Color.gray()
+    header.textSize = 18
+    header.textColor = Color.white()
     
     let tempfstr = str.concat(" F")
     
     let tempf = wg.addText(tempfstr)
-    tempf.textColor = Color.gray()
+    tempf.textSize = 15
+    tempf.textColor = Color.white()
 
   } catch (e) {
     console.log(e)
@@ -69,6 +72,6 @@ function runaswidget(str, wg) {
     err.textOpacity = 30
   }
 
-  Script.setWidget(wg);
-  Script.complete();
+//   Script.setWidget(wg);
+//   Script.complete();
 }
